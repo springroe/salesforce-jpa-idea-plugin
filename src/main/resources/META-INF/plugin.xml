@@ -1,0 +1,33 @@
+<idea-plugin>
+    <id>io.github.springroe.salesforce-jpa-idea-plugin</id>
+    <name>salesforce-jpa-idea-plugin</name>
+    <vendor email="boil@vip.qq.com" url="https://github.com/springroe/salesforce-jpa-idea-plugin">kongsiyu</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="salesforce_tools" text="Salesforce Tool"
+               popup="true" icon="/icons/logo.png">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="ReplaceInPath"/>
+        </group>
+        <!-- 创建Halo Basic -->
+        <action class="io.github.springroe.intellij.salesforce.NewSalesforceEntityAction"
+                id="leiyan.salesforce.class" description="SalesforceClass"
+                icon="/icons/logo.png"
+                text="New Salesforce Class">
+            <add-to-group group-id="salesforce_tools"/>
+        </action>
+    </actions>
+</idea-plugin>
