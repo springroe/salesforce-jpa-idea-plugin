@@ -1,0 +1,1 @@
+# salesforce-jpa-idea-plugin
