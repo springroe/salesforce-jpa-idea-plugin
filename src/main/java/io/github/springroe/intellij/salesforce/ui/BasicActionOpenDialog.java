@@ -1,4 +1,4 @@
-package io.github.springroe.intellij.salesforce;
+package io.github.springroe.intellij.salesforce.ui;
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.wizard.AbstractWizard;
@@ -9,8 +9,9 @@ import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Halo Basic组创建
- * @author xujin
+ * 组创建
+ *
+ * @author ksy
  */
 public class BasicActionOpenDialog extends AbstractWizard<ModuleWizardStep> {
 
@@ -30,7 +31,7 @@ public class BasicActionOpenDialog extends AbstractWizard<ModuleWizardStep> {
 
     public ModuleWizardStep[] createWizardSteps() {
         return new ModuleWizardStep[]{
-                new BasicCreateSelectInfoStep(myProject,myModule)
+                new BasicCreateSelectInfoStep(myProject, myModule)
         };
     }
 

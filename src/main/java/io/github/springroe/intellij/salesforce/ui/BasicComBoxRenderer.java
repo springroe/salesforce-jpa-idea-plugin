@@ -1,6 +1,7 @@
-package io.github.springroe.intellij.salesforce;
+package io.github.springroe.intellij.salesforce.ui;
 
 
+import io.github.springroe.intellij.salesforce.PluginConstant;
 import io.github.springroe.intellij.salesforce.domain.SelectedTypeModel;
 
 import javax.swing.*;
@@ -19,25 +20,25 @@ public class BasicComBoxRenderer extends DefaultListCellRenderer {
     private Color defaultBackground = (Color) UIManager.get("List.background");
 
     public BasicComBoxRenderer() {
-        iconMap.put(HaloConstant.COMBOX_CONTROLLER, new ImageIcon(getClass().getResource("/icons/right/controller.png")));
-        iconMap.put(HaloConstant.COMBOX_ENTITY, new ImageIcon(getClass().getResource("/icons/right/controller.png")));
+        iconMap.put(PluginConstant.COMBOX_CONTROLLER, new ImageIcon(getClass().getResource("/icons/right/controller.png")));
+        iconMap.put(PluginConstant.COMBOX_ENTITY, new ImageIcon(getClass().getResource("/icons/right/controller.png")));
     }
 
     public static List<SelectedTypeModel> getSelectedList() {
         List<SelectedTypeModel> list = new ArrayList<SelectedTypeModel>();
         SelectedTypeModel blank = new SelectedTypeModel();
         blank.setName("");
-        blank.setValue(HaloConstant.COMBOX_BLANK);
+        blank.setValue(PluginConstant.COMBOX_BLANK);
         list.add(blank);
 
         SelectedTypeModel mapper = new SelectedTypeModel();
         mapper.setName("Entity");
-        mapper.setValue(HaloConstant.COMBOX_ENTITY);
+        mapper.setValue(PluginConstant.COMBOX_ENTITY);
         list.add(mapper);
 
         SelectedTypeModel controller = new SelectedTypeModel();
         controller.setName("Controller");
-        controller.setValue(HaloConstant.COMBOX_CONTROLLER);
+        controller.setValue(PluginConstant.COMBOX_CONTROLLER);
         // list.add(controller);
 
 

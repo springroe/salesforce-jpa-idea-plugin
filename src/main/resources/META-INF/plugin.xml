@@ -13,7 +13,14 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationService
+                serviceImplementation="io.github.springroe.intellij.salesforce.state.SalesforceAuthModelService"/>
         <!-- Add your extensions here -->
+        <applicationConfigurable parentId="tools"
+                                 instance="io.github.springroe.intellij.salesforce.entry.extensions.ApplicationSettingsConfigurable"
+                                 id="io.github.springroe.salesforce-jpa-idea-plugin.ApplicationSettingsConfigurable"
+                                 displayName="salesforce"/>
+
     </extensions>
 
     <actions>
@@ -22,11 +29,18 @@
                popup="true" icon="/icons/logo.png">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="ReplaceInPath"/>
         </group>
-        <!-- 创建Halo Basic -->
-        <action class="io.github.springroe.intellij.salesforce.NewSalesforceEntityAction"
-                id="leiyan.salesforce.class" description="SalesforceClass"
+        <!-- 通过salesforce object manager text创建JpaEntity -->
+        <action class="io.github.springroe.intellij.salesforce.entry.actions.NewSalesforceEntityAction"
+                id="springroe.salesforce.NewSalesforceEntityAction" description="SalesforceClass"
                 icon="/icons/logo.png"
                 text="New Salesforce Class">
+            <add-to-group group-id="salesforce_tools"/>
+        </action>
+        <!-- 通过salesforce api创建JpaEntity -->
+        <action class="io.github.springroe.intellij.salesforce.entry.actions.NewSalesforceEntityUseApiAction"
+                id="springroe.salesforce.NewSalesforceEntityUseApiAction" description="SalesforceClass"
+                icon="/icons/logo.png"
+                text="New Entity Use Api">
             <add-to-group group-id="salesforce_tools"/>
         </action>
     </actions>

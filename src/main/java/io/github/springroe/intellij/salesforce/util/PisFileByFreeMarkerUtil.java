@@ -12,8 +12,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.util.OpenSourceUtil;
-import io.github.springroe.intellij.salesforce.domain.NewRightModel;
 import freemarker.template.Template;
+import io.github.springroe.intellij.salesforce.domain.NewEntityModel;
 
 import java.io.StringWriter;
 
@@ -34,15 +34,16 @@ public class PisFileByFreeMarkerUtil {
      */
     public static void createFile(Project project, Object model, String moduleRootPath, String ftlName) throws Exception {
 
-        NewRightModel rightModel = (NewRightModel) model;
-        VirtualFile vf = createPackageDir(rightModel.getSelectedPackage(), moduleRootPath);
+
+        NewEntityModel entityModel = (NewEntityModel) model;
+        VirtualFile vf = createPackageDir(entityModel.getSelectedPackage(), moduleRootPath);
         //可以使用virtualfile.createChildData（）方法创建文件实例
-        VirtualFile virtualFile = vf.createChildData(project, rightModel.getClassName() + ".kt");
+        VirtualFile virtualFile = vf.createChildData(project, entityModel.getEntityModel().getEntityName() + ".kt");
         StringWriter sw = new StringWriter();
         Template template = PisFileByFreeMarkerUtil.freemarker.getTemplate(ftlName);
-        template.process(model, sw);
+        template.process(entityModel, sw);
         //使用VirtualFile.setBinaryContent()写一些数据到对应的文件中
-        virtualFile.setBinaryContent(sw.toString().getBytes(HaloIdeaUtils.DEFAULT_CHARSET));
+        virtualFile.setBinaryContent(sw.toString().getBytes(IdeaUtils.DEFAULT_CHARSET));
         //HaloIdeaUtils.addWaitOptimizeFile(virtualFile);
 
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);

@@ -1,9 +1,10 @@
-package io.github.springroe.intellij.salesforce;
+package io.github.springroe.intellij.salesforce.ui;
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import io.github.springroe.intellij.salesforce.PluginConstant;
 import io.github.springroe.intellij.salesforce.domain.NewRightContext;
 import io.github.springroe.intellij.salesforce.domain.SelectedTypeModel;
 
@@ -63,11 +64,11 @@ public class BasicCreateSelectInfoStep extends ModuleWizardStep {
             public void itemStateChanged(ItemEvent e) {
                 SelectedTypeModel selectedTypeModel = (SelectedTypeModel) e.getItem();
                 switch (selectedTypeModel.getValue()) {
-                    case HaloConstant.COMBOX_ENTITY:
-                        NewRightContext.setClassType(HaloConstant.COMBOX_ENTITY);
+                    case PluginConstant.COMBOX_ENTITY:
+                        NewRightContext.setClassType(PluginConstant.COMBOX_ENTITY);
                         break;
-                    case HaloConstant.COMBOX_CONTROLLER:
-                        NewRightContext.setClassType(HaloConstant.COMBOX_CONTROLLER);
+                    case PluginConstant.COMBOX_CONTROLLER:
+                        NewRightContext.setClassType(PluginConstant.COMBOX_CONTROLLER);
                         break;
                     default:
                         NewRightContext.setClassType(null);

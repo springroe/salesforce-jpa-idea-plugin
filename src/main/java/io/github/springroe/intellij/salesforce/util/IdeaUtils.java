@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author xujin
+ * @author kongsiyu
  */
-public class HaloIdeaUtils {
+public class IdeaUtils {
     public static final String DEFAULT_CHARSET = "UTF-8";
 
     public static void invokeAndWait(Project p, Runnable r) {

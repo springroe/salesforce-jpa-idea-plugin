@@ -20,6 +20,14 @@ dependencies {
     // https://mvnrepository.com/artifact/org.freemarker/freemarker
     implementation "org.freemarker:freemarker:$freemarkerVersion"
 
+
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.threeten:threetenbp:1.4.0'
+    implementation 'io.gsonfire:gson-fire:1.8.3'
+    implementation 'io.swagger:swagger-annotations:1.5.22'
+
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
