@@ -11,4 +11,5 @@ public class SalesforceEntityModel {
     private String entityName = "";
     private String entityRemark = "";
     private String tableName = "";
+    private String soql = "";
 }

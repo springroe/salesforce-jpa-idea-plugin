@@ -23,4 +23,9 @@ class ${entityModel.entityName} : NormalSalesForceEntity() {
     </#if>
     var ${property.mappingName}: ${property.mappingType}? = null
 </#list>
+
+    companion object {
+        const val SOQL = "${entityModel.soql}"
+    }
+
 }

@@ -15,6 +15,7 @@ import org.openapitools.client.model.ObjectInfoSobjects;
 import org.openapitools.client.model.ObjectMetaData;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ItemEvent;
@@ -32,6 +33,7 @@ public class ApiNewEntityActionDialogForm extends ModuleWizardStep {
     private JTextField txtTableName;
     private JTextField txtSobjectApiName;
     private JTable tableProperties;
+    private JTextArea txtSoql;
 
     private Project myProject;
     private Module myModule;
@@ -47,6 +49,8 @@ public class ApiNewEntityActionDialogForm extends ModuleWizardStep {
         this.myProject = myProject;
         this.myModule = myModule;
         comboObject.addItemListener(this::itemSelectHandle);
+        tableProperties.getSelectionModel().addListSelectionListener(this::tableRowSelectHandle);
+        txtSoql.setLineWrap(true);
     }
 
     @Override
@@ -82,10 +86,7 @@ public class ApiNewEntityActionDialogForm extends ModuleWizardStep {
         if (indexes.length == 0) {
             throw new ConfigurationException("properties cannot be empty, please select at least one!", "Create Class Tips");
         }
-        var selectedPropertyModels = propertyModels
-                .stream()
-                .filter(r -> Arrays.stream(indexes).anyMatch(i -> i == propertyModels.indexOf(r)))
-                .collect(Collectors.toList());
+        var selectedPropertyModels = getSelectedRows();
         var model = new NewEntityModel();
         model.setEntityModel(data);
         model.setPropertyModels(selectedPropertyModels);
@@ -94,7 +95,7 @@ public class ApiNewEntityActionDialogForm extends ModuleWizardStep {
     }
 
     private void itemSelectHandle(ItemEvent e) {
-        if (e.getStateChange() == 1) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
             var index = items.indexOf(e.getItem());
             var object = sobjectsList.get(index);
             selectedItem = object;
@@ -110,6 +111,18 @@ public class ApiNewEntityActionDialogForm extends ModuleWizardStep {
             setData(new SalesforceEntityModel());
             tableProperties.removeAll();
         }
+    }
+
+    private void tableRowSelectHandle(ListSelectionEvent e) {
+        var selectedRows = getSelectedRows();
+        var soql = new StringBuilder("SELECT ");
+        for (int i = 0; i < selectedRows.size(); i++) {
+            soql.append(selectedRows.get(i).getName());
+            if (i < selectedRows.size() - 1) soql.append(",");
+        }
+        soql.append(" FROM ");
+        soql.append(txtSobjectApiName.getText());
+        txtSoql.setText(soql.toString());
     }
 
     private void tableModelListenerHandle(TableModelEvent e) {
@@ -134,6 +147,14 @@ public class ApiNewEntityActionDialogForm extends ModuleWizardStep {
                 break;
             }
         }
+    }
+
+    private List<SalesforceEntityPropertyModel> getSelectedRows() {
+        var indexes = tableProperties.getSelectedRows();
+        return propertyModels
+                .stream()
+                .filter(r -> Arrays.stream(indexes).anyMatch(i -> i == propertyModels.indexOf(r)))
+                .collect(Collectors.toList());
     }
 
     private void loadObjects() {
@@ -184,6 +205,7 @@ public class ApiNewEntityActionDialogForm extends ModuleWizardStep {
         data.setEntityName(txtEntityName.getText());
         data.setEntityRemark(txtEntityRemark.getText());
         data.setTableName(txtTableName.getText());
+        data.setSoql(txtSoql.getText());
     }
 
     public boolean isModified(SalesforceEntityModel data) {
