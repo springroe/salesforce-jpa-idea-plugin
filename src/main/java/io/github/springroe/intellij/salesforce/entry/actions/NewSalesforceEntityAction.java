@@ -82,7 +82,7 @@ public class NewSalesforceEntityAction extends AnAction {
     private void createByFtl(Project project, String moduleRootPath, String ftlName) {
         NewRightModel newRightModel = NewRightContext.copyToNewRightModel();
         try {
-            PisFileByFreeMarkerUtil.createFile(project, newRightModel, moduleRootPath, ftlName);
+            PisFileByFreeMarkerUtil.createFile(project, newRightModel.getNewEntityModel(), moduleRootPath, ftlName);
             NewRightContext.clearAllSet();
         } catch (Exception ex) {
             ex.printStackTrace();

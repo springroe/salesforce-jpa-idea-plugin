@@ -111,15 +111,25 @@ public class NewRightContext {
     }
 
     public static NewRightModel copyToNewRightModel() {
-        NewRightModel newRightModel = new NewRightModel();
-        newRightModel.setClassName(className);
-        newRightModel.setClassDescription(classDescription);
-        newRightModel.setClassType(classType);
-        newRightModel.setSelectedPackage(selectedPackage);
-        newRightModel.setPropertyList(propertyList);
-        newRightModel.setClassObjectName(classObjectName);
-        newRightModel.setTableName("sf" + Tool.humpToLine(className));
-        return newRightModel;
+        NewRightModel rightModel = new NewRightModel();
+        NewEntityModel model = new NewEntityModel();
+        SalesforceEntityModel entityModel = new SalesforceEntityModel();
+        entityModel.setObjectName(classObjectName);
+        entityModel.setObjectLabel(classDescription);
+        entityModel.setEntityName(className);
+        entityModel.setEntityRemark(classDescription);
+        entityModel.setTableName("sf" + Tool.humpToLine(className));
+
+        model.setEntityModel(entityModel);
+        model.setSelectedPackage(selectedPackage);
+        model.setPropertyModels(propertyList.stream()
+                .map(SalesforceEntityProperty::toModel)
+                .collect(Collectors.toList()));
+
+        rightModel.setClassType(classType);
+        rightModel.setNewEntityModel(model);
+
+        return rightModel;
     }
 
 }

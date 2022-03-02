@@ -14,6 +14,8 @@ public class SalesforceEntityProperty {
     private String type;
     private String label;
     private String description;
+    private int length = 0;
+    private int precision = 0;
 
     private static final List<String> keywords = new ArrayList<>() {{
         add("id");
@@ -84,7 +86,7 @@ public class SalesforceEntityProperty {
         } else if (type.startsWith("数字")) {
             var precisionStr = StringUtils.substringAfter(type, ",");
             precisionStr = StringUtils.substringBefore(precisionStr, ")").trim();
-            var precision = Integer.parseInt(precisionStr);
+            precision = Integer.parseInt(precisionStr);
             if (precision > 0) {
                 return "Double";
             } else {
@@ -95,5 +97,9 @@ public class SalesforceEntityProperty {
         } else {
             return "String";
         }
+    }
+
+    public SalesforceEntityPropertyModel toModel() {
+        return new SalesforceEntityPropertyModel(label, name, getJavaName(), type, getJavaType(), length, precision, description);
     }
 }

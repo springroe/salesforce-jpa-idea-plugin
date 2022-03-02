@@ -33,6 +33,17 @@ public class SalesforceEntityPropertyModel {
         this.mappingType = getKotlinType();
     }
 
+    public SalesforceEntityPropertyModel(String label, String name, String mappingName, String type, String mappingType, int length, int scale, String description) {
+        this.label = label;
+        this.name = name;
+        this.mappingName = mappingName;
+        this.type = type;
+        this.mappingType = mappingType;
+        this.length = length;
+        this.scale = scale;
+        this.description = description;
+    }
+
     public SalesforceEntityPropertyModel(ObjectMetaDataFields fields) {
         this(fields.getLabel(), fields.getName(), fields.getType(), fields.getLength(), fields.getScale(), fields.getInlineHelpText());
     }
