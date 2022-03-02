@@ -19,8 +19,7 @@
         <applicationConfigurable parentId="tools"
                                  instance="io.github.springroe.intellij.salesforce.entry.extensions.ApplicationSettingsConfigurable"
                                  id="io.github.springroe.salesforce-jpa-idea-plugin.ApplicationSettingsConfigurable"
-                                 displayName="salesforce"/>
-
+                                 displayName="Salesforce"/>
     </extensions>
 
     <actions>
