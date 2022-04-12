@@ -38,6 +38,7 @@
 *意向xx折扣百分比  &emsp;  Intentxxcount__c	&emsp;  百分比(10, 8)  
 
 # 二、结果展示：
+
 ```kotlin
 @Schema(description = "AI 应用程序")
 @SalesforceEntity("AIApplication")
