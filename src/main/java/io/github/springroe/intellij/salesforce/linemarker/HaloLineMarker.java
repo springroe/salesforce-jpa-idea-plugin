@@ -28,7 +28,7 @@ public class HaloLineMarker implements LineMarkerProvider {
             }
             PsiClassImpl field = ((PsiClassImpl) psiElement);
             PsiAnnotation psiAnnotation = field.getAnnotation(anno);
-            lineMarkerInfo = new LineMarkerInfo<>(psiAnnotation, psiAnnotation.getTextRange(), IconLoader.findIcon("/icons/right/HaloBasic.png"),
+            lineMarkerInfo = new LineMarkerInfo<>(psiAnnotation, psiAnnotation.getTextRange(), IconLoader.findIcon("/icons/right/HaloBasic.png",getClass().getClassLoader()),
                     new FunctionTooltip("快速导航"),
                     new AppMgmtNavigationHandler(),
                     GutterIconRenderer.Alignment.LEFT);
